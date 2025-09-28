@@ -19,9 +19,12 @@ import { Badge } from '@/components/ui/badge';
 import { ArrowUp, ArrowDown } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useExchange } from '@/hooks/useExchange';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 export function DeltaNeutralTable() {
   const opportunities = useDeltaNeutralOpportunities();
+	const {isLoading} = useExchange();
 
   const [periodHours, setPeriodHours] = useState(8); // default view in 8h
 
@@ -45,7 +48,9 @@ export function DeltaNeutralTable() {
           </div>
         </CardHeader>
         <CardContent>
-          {opportunities.length === 0 ? (
+          {isLoading ? (
+						<LoadingSpinner/>
+					) : opportunities.length === 0 ? (
             <p>Aucune paire partagée entre les exchanges sélectionnés.</p>
           ) : (
             <div className="space-y-6">
@@ -68,14 +73,14 @@ export function DeltaNeutralTable() {
                           <ArrowUp className="w-4 h-4 text-green-600" />
                           <span>
                             Long sur <strong>{op.bestLong.exchange}</strong> @{' '}
-                            {(longRate * 100).toFixed(3)} %
+                            {op.bestLong.token.price.toFixed(5)} $
                           </span>
                         </div>
                         <div className="flex items-center space-x-1">
                           <ArrowDown className="w-4 h-4 text-red-600" />
                           <span>
                             Short sur <strong>{op.bestShort.exchange}</strong> @{' '}
-                            {(shortRate * 100).toFixed(3)} %
+                            {op.bestShort.token.price.toFixed(5)} $
                           </span>
                         </div>
                       </div>
@@ -98,10 +103,10 @@ export function DeltaNeutralTable() {
                                 {(token.funding_rate * periodHours * 100).toFixed(4)} %
                               </TableCell>
                               <TableCell>
-                                {token.volume_24.toLocaleString()}
+                                {token.volume_24.toLocaleString()} $USD
                               </TableCell>
                               <TableCell>
-                                {token.open_interest_USD.toLocaleString()}
+                                {token.open_interest_USD.toLocaleString()} $USD
                               </TableCell>
                             </TableRow>
                           ))}

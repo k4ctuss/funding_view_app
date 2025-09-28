@@ -33,7 +33,6 @@ export interface TradingPair {
 // Configuration des exchanges supportés
 export interface ExchangeConfig {
 	name: string;
-	display_name: string;
 	service: BaseExchangeService;
 	is_enabled: boolean;
 	color: string; // Pour l'UI

@@ -7,15 +7,13 @@ import { ParadexService } from '@/services/paradex';
 
 const EXCHANGE_CONFIGS: ExchangeConfig[] = [
   {
-    name: 'hyperliquid',
-    display_name: 'Hyperliquid',
+    name: 'Hyperliquid',
     service: new HyperliquidService(),
     is_enabled: true,
     color: '#1BF287', // vert hyperliquid
   },
 	{
-    name: 'paradex',
-    display_name: 'Paradex',
+    name: 'Paradex',
     service: new ParadexService(),
     is_enabled: true,
     color: '#111111', // vert hyperliquid
