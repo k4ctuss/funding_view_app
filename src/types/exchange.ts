@@ -110,3 +110,36 @@ export interface ParadexMarketStaticItem {
   funding_period_hours: number | null;   // double (heures)
   symbol: string | null;
 }
+
+export interface LighterOrderBookStat {
+
+  symbol: string;
+  last_trade_price: number;
+  daily_trades_count: number;
+  daily_base_token_volume: number;
+  daily_quote_token_volume: number;
+  daily_price_change: number;
+}
+
+export interface LighterExchangeStatsResponse {
+ 
+  code: number;
+  total: number;
+  order_book_stats: LighterOrderBookStat[];
+  daily_usd_volume: number;
+  daily_trades_count: number;
+}
+
+// types/fundingRates.ts
+
+export interface LighterFundingRateEntry {
+  market_id: number;
+  exchange: string;
+  symbol: string;
+  rate: number;
+}
+
+export interface LighterFundingRatesResponse {
+  code: number;
+  funding_rates: LighterFundingRateEntry[];
+}

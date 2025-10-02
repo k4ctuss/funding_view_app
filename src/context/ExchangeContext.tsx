@@ -4,6 +4,7 @@ import type { Token }  from '../types/token';
 import { createContext, useReducer, useEffect, useCallback, useMemo } from 'react';
 import { HyperliquidService } from '@/services/hyperliquid';
 import { ParadexService } from '@/services/paradex';
+import { LighterService } from '@/services/ligther';
 
 const EXCHANGE_CONFIGS: ExchangeConfig[] = [
   {
@@ -15,6 +16,12 @@ const EXCHANGE_CONFIGS: ExchangeConfig[] = [
 	{
     name: 'Paradex',
     service: new ParadexService(),
+    is_enabled: true,
+    color: '#111111', // vert hyperliquid
+  },
+	{
+    name: 'Lighter',
+    service: new LighterService(),
     is_enabled: true,
     color: '#111111', // vert hyperliquid
   },
