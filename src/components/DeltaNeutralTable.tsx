@@ -16,7 +16,7 @@ import {
   TableCell,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { ArrowUp, ArrowDown } from 'lucide-react';
+import { ArrowUp, ArrowDown, Info } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useExchange } from '@/hooks/useExchange';
@@ -83,7 +83,16 @@ export function DeltaNeutralTable() {
                             {op.bestShort.token.price.toFixed(5)} $
                           </span>
                         </div>
-                      </div>
+												{op.all.filter(({ exchange }) => exchange !== op.bestShort.exchange && exchange !== op.bestLong.exchange ).map(({ exchange, token }) => (
+													<div className="flex items-center space-x-1">
+														<Info className="w-4 h-4 text-blue-600" />
+														<span>
+															<strong>{exchange}</strong> @{' '}
+															{token.price.toFixed(5)} $
+														</span>
+                        	</div>
+												))}
+											</div>	
                     </CardHeader>
                     <CardContent>
                       <Table>
